@@ -5,9 +5,6 @@ const { Client, Intents } = require('discord.js');
 const token = process.env.BOT_TOKEN;
 const commandPrefix = process.env.COMMAND_PREFIX;
 
-const { performance } = require('perf_hooks');
-
-
 // Create a new client instance
 const client = new Client({
 	intents: [
@@ -153,7 +150,6 @@ function autocorrect(msg) { //all replacements
 		//"t": "TwT", //
 	};
 
-	const start = performance.now();
 	// Lowercase version of the message. We search this string for the terms, but if we don't find a term somewhere,
 	// we keep the character from the original version.
 	const msgLowercase = msg.content.toLowerCase();
@@ -180,8 +176,6 @@ function autocorrect(msg) { //all replacements
 		// If we got here, it means there is no term at msgLowercase[i].
 		result += msg.content[i];
 	}
-
-	console.log(performance.now() - start);
 
 	if (result == msg.content.toLowerCase()) {	// all lowercase
 		return;
