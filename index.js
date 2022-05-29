@@ -1,4 +1,4 @@
-// Version: 2.4.0 Private
+// Version: 2.4.4 Private
 
 require("dotenv").config();
 const { Client, Intents } = require('discord.js');
@@ -37,8 +37,8 @@ const commands = {
 	"slgb": gaybowser,
 	"braadworstspring": skeerogame,
 	"bws": skeerogame,
-	"walcrack": walcrack,
-	"walcoin": walcrack,
+	//"walcrack": walcrack,
+	//"walcoin": walcrack,
 	"credits": credit,
 }
 
@@ -47,25 +47,27 @@ function help(msg) {
 	for (const command in commands) {
 		ret += "\n- " + commandPrefix + command;
 	}
-	ret += "\n\nvoor meer hulp, ga naar: http://www.matsw.tk/www/Bas/BanaanBot/BanaanBot.html"
+	ret += "\n\nVoor meer hulp, ga naar: https://sentinel9111.github.io/BanaanBotWebsite/ of DM/ping Sentinel#3827 voor suggesties."
 	return ret;
 }
 
 function gaybowser(msg) {
-	return "http://www.matsw.tk/";
+	return "https://sentinel9111.github.io/SoLongGayBowser/";
 }
 
 function dictionary(msg) {
-	return "http://www.matsw.tk/www/Bas/BanaanBot/BanaanBot.html";
+	return "https://sentinel9111.github.io/BanaanBotWebsite/";
 }
 
 function skeerogame(msg) {
 	return "https://theepicblock.nl/braadworstspring";
 }
 
+/*
 function walcrack(msg) {
 	return "http://matsw.tk/www/Discord/WalCrack.html";
 }
+*/
 
 function credit(msg) {
 	return "Gemaakt door Sentinel met behulp van TheEpicBlock_TEB, MichaHere, Walcraft22 & Foxite"
@@ -125,7 +127,7 @@ function autocorrect(msg) { //all replacements
 		"reageert": "rea-Gert",
 		"bill gates": "Rekening Poorten",
 		"mensen uit groep acht": "rivieren",
-		"de lichtelijke irritatie van iemand die lichtelijk geïrriteerd is": "superieure kracht van de woede van de aandachtige Juno door de woede", // perhaps too specific
+		"de lichtelijke irritatie van iemand die lichtelijk geïrriteerd is": "superieure kracht van de woede van de aandachtige Juno door de woede",
 		"woede": "**LLANFAIRPWLLGWYNGYLLGOGERYCHWYRNDROBWLLLLANTYSILIOGOGOGOCH!!!**",
 		"endportal gateway": "TicTac Endportal",
 		"flut": "tomaat",
@@ -146,7 +148,12 @@ function autocorrect(msg) { //all replacements
 		"belgië": "Benederland",
 		"madagaskar": "Mad at gas car",
 		"helaas": "gekaasfondued",
-		//"o": "OwO", // put these 3 last.
+		"gtw": "Gouden Thierry Wagen",
+		"link": "Golden Mario",
+		"verwijderd": "verweitert",
+		"wordt": "wort",
+		"word": "wort",
+		//"o": "OwO", //
 		//"u": "UwU", //
 		//"t": "TwT", //
 	};
@@ -197,6 +204,17 @@ client.login(token);
 
 /*
 Known bugs:
--Crashes when an unknown command occurs.
 -Makes the whole sentence lowercase.
+-The bot corrects the already corrected words.
+-Bot crashes when an unknow command occurs. (Only occurs on rpi for some reason.)
+
+Plans:
+-Automatic Bot updates on rpi
+
+-The bot should send a better help menu inside of Discord.
+-The bot should replace your message with a webhook.
+-The bot should change the corrected message back to the original message if you reply with "Nee" or "No".
+-You should be able to enable or disable certain features or words per server.
+-A leveling system which gives XP if you use words from the Kase language should be added.
+-Banaanbot hater role.
 */
