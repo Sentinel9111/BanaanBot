@@ -75,7 +75,6 @@ function credit(msg) {
 
 // source: Woordenboek K - Nederlands (https://docs.google.com/document/d/1lavyuSKmQSTa-GWlmRY5kel-iEe6wuf5_VkqlgXtA7M/mobilebasic)
 function autocorrect(msg) { //all replacements
-	let result = msg.content.toLowerCase()
 	const replacements = {
 		"nice": "🤧",
 		"ja": "🧅",
@@ -91,7 +90,7 @@ function autocorrect(msg) { //all replacements
 		"doei": "kom met me mee",
 		"de deur dicht, maar niet op slot doen": "door de deur de deur dicht doen",
 		"scramblen": "door de midden halen",
-		"frans": "flu‌t", // zero width non joiner between 'u' and 't'
+		"frans": "flut",
 		"no offence": "geen uit-hek",
 		"geluiden": "geluiten",
 		"graphic": "graphic",
@@ -141,7 +140,7 @@ function autocorrect(msg) { //all replacements
 		// end of dictionary K - Nederlands
 		"bedoelde je: aardappel?": "Aardappel",
 		"worst case": "worst kaas",
-		"patat": "fr‌iet", // zero width non joiner between 'r' and 'i'
+		"patat": "friet",
 		"friet": "patat",
 		"oof": "🥚",
 		"belgie": "Benederland",
@@ -158,8 +157,31 @@ function autocorrect(msg) { //all replacements
 		//"t": "TwT", //
 	};
 
-	for (const target in replacements) {
-		result = result.replaceAll(target, replacements[target]);
+	// Lowercase version of the message. We search this string for the terms, but if we don't find a term somewhere,
+	// we keep the character from the original version.
+	const msgLowercase = msg.content.toLowerCase();
+	let result = "";
+	searchString:
+	for (let i = 0; i < msgLowercase.length; i++) {
+		searchTerms:
+		// for..in iterates over keys. term is the key in the dictionary above.
+		for (const term in replacements) {
+			// Check if the term matches msgLowercase at i
+			for (let j = 0; j < term.length && i + j < msgLowercase.length; j++) {
+				if (term[j] !== msgLowercase[i + j]) {
+					// If the character in the term does not match msgLowercase, move on to the next term.
+					continue searchTerms;
+				}
+			}
+			// If we got here, it means the term is at msgLowercase[i].
+			// Stop searching for more terms, and increase i by the length of the term we added.
+			const replacement = replacements[term];
+			result += replacement;
+			i += term.length - 1; // -1 because the for loop increases it by 1
+			continue searchString;
+		}
+		// If we got here, it means there is no term at msgLowercase[i].
+		result += msg.content[i];
 	}
 
 	if (result == msg.content.toLowerCase()) {	// all lowercase
@@ -204,13 +226,9 @@ client.login(token);
 
 /*
 Known bugs:
--Makes the whole sentence lowercase.
--The bot corrects the already corrected words.
 -Bot crashes when an unknow command occurs. (Only occurs on rpi for some reason.)
-
 Plans:
 -Automatic Bot updates on rpi
-
 -The bot should send a better help menu inside of Discord.
 -The bot should replace your message with a webhook.
 -The bot should change the corrected message back to the original message if you reply with "Nee" or "No".
