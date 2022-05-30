@@ -183,17 +183,21 @@ client.on('messageCreate', (msg) => { // if message author is a bot, don't send 
     if (msg.content.startsWith(commandPrefix)) {
         command = msg.content.toLowerCase().substring(commandPrefix.length);
         try{
-			const result = commands[command](msg);
-            if (!result) {
-                console.error("trying to send null or empty string");
-            } else if (result.length >= 2000) {
-                console.error("trying to send message over 2000 characters");
-            } else {
-                msg.reply(result);
-            }
+            const commandFunction = commands[command];
+			// If the command is not recognized, don't respond
+			if (commandFunction) {
+				const result = commandFunction(msg);
+				if (!result) {
+					console.error("trying to send null or empty string");
+				} else if (result.length >= 2000) {
+					console.error("trying to send message over 2000 characters");
+				} else {
+					msg.reply(result);
+				}
+			}
         }catch(e){
             console.log("Unexpected error: "+e)
-            }
+        }
     } else {
         autocorrect(msg);
     }
