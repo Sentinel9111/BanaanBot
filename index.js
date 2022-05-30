@@ -1,4 +1,4 @@
-// Version: 2.4.4 Private
+// Version: 2.4.4
 
 require("dotenv").config();
 const { Client, Intents } = require('discord.js');
