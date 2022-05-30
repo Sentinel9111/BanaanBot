@@ -210,7 +210,6 @@ client.login(token);
 Known bugs:
 -Makes the whole sentence lowercase.
 -The bot corrects the already corrected words.
--Bot crashes when an unknow command occurs. (Only occurs on rpi for some reason.)
 
 Plans:
 -Automatic Bot updates on rpi
