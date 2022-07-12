@@ -167,13 +167,18 @@ function autocorrect(msg) { //all replacements
 		// for..in iterates over keys. term is the key in the dictionary above.
 		for (const term in replacements) {
 			// Check if the term matches msgLowercase at i
-			for (let j = 0; j < term.length && i + j < msgLowercase.length; j++) {
+			let j = 0;
+			for (; j < term.length && i + j < msgLowercase.length; j++) {
 				if (term[j] !== msgLowercase[i + j]) {
 					// If the character in the term does not match msgLowercase, move on to the next term.
 					continue searchTerms;
 				}
 			}
-			// If we got here, it means the term is at msgLowercase[i].
+			if (j < term.length) {
+				// we broke out of the loop because we reached the end of the message, not because the word is a match
+				continue searchTerms;
+			}
+			// If we got here, it means we broke out of the loop because we reached the end of the term, and so the term is at msgLowercase[i].
 			// Stop searching for more terms, and increase i by the length of the term we added.
 			const replacement = replacements[term];
 			result += replacement;
