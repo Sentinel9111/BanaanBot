@@ -208,7 +208,7 @@ client.on('messageCreate', (msg) => { // if message author is a bot, don't send 
     }
 
     if (msg.content.startsWith(commandPrefix)) {
-        command = msg.content.toLowerCase().substring(commandPrefix.length);
+        const command = msg.content.toLowerCase().substring(commandPrefix.length);
         try{
             const commandFunction = commands[command];
 			// If the command is not recognized, don't respond
