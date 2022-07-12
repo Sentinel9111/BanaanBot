@@ -1,4 +1,4 @@
-// Version: 2.5.1
+// Version: 2.6.1
 
 require("dotenv").config();
 const { Client, Intents } = require('discord.js');
@@ -70,7 +70,7 @@ function walcrack(msg) {
 */
 
 function credit(msg) {
-	return "Gemaakt door Sentinel met behulp van TheEpicBlock_TEB, MichaHere, Walcraft22 & Foxite"
+	return "Gemaakt door Sentinel met veel hulp van TheEpicBlock_TEB, MichaHere, Walcraft22, Foxite, Zorian & SK"
 }
 
 // source: Woordenboek K - Nederlands (https://docs.google.com/document/d/1lavyuSKmQSTa-GWlmRY5kel-iEe6wuf5_VkqlgXtA7M/mobilebasic)
@@ -237,7 +237,7 @@ client.login(token);
 Known bugs:
 
 Plans:
--Automatic Bot updates on rpi
+-Dockerize bot inside of Pterodactyl.
 -The bot should send a better help menu inside of Discord.
 -The bot should replace your message with a webhook.
 -The bot should change the corrected message back to the original message if you reply with "Nee" or "No".
