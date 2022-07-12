@@ -2,6 +2,7 @@
 
 require("dotenv").config();
 const { Client, Intents } = require('discord.js');
+
 const token = process.env.BOT_TOKEN;
 const commandPrefix = process.env.COMMAND_PREFIX;
 
@@ -74,7 +75,7 @@ function credit(msg) {
 }
 
 // source: Woordenboek K - Nederlands (https://docs.google.com/document/d/1lavyuSKmQSTa-GWlmRY5kel-iEe6wuf5_VkqlgXtA7M/mobilebasic)
-function autocorrect(msg) { //all replacements
+function autocorrect(messageContent) {
 	const replacements = {
 		"nice": "🤧",
 		"ja": "🧅",
@@ -159,7 +160,7 @@ function autocorrect(msg) { //all replacements
 
 	// Lowercase version of the message. We search this string for the terms, but if we don't find a term somewhere,
 	// we keep the character from the original version.
-	const msgLowercase = msg.content.toLowerCase();
+	const msgLowercase = messageContent.toLowerCase();
 	let changed = false;
 	let result = "";
 	searchString:
@@ -188,29 +189,26 @@ function autocorrect(msg) { //all replacements
 			continue searchString;
 		}
 		// If we got here, it means there is no term at msgLowercase[i].
-		result += msg.content[i];
+		result += messageContent[i];
 	}
 
 	if (changed) {
-		result = "Bedoelde je: " + result + "?";	// Bedoelde je: ?
-
-		if (result.length >= 2000) { // if message is too long, send something else
-			msg.reply("Stop pesten 😭");
-		} else if (result !== msg.content) { // otherwise send the message
-			msg.reply(result);
-		}
+		return result;
+	} else {
+		return false;
 	}
 }
 
-client.on('messageCreate', (msg) => { // if message author is a bot, don't send message
-    if(msg.author.bot){
-        return;
-    }
+client.on('messageCreate', (msg) => {
+	// if message author is a bot, don't send message
+	if (msg.author.bot) {
+		return;
+	}
 
-    if (msg.content.startsWith(commandPrefix)) {
-        const command = msg.content.toLowerCase().substring(commandPrefix.length);
-        try{
-            const commandFunction = commands[command];
+	try {
+		if (msg.content.startsWith(commandPrefix)) {
+			const command = msg.content.toLowerCase().substring(commandPrefix.length);
+			const commandFunction = commands[command];
 			// If the command is not recognized, don't respond
 			if (commandFunction) {
 				const result = commandFunction(msg);
@@ -222,12 +220,15 @@ client.on('messageCreate', (msg) => { // if message author is a bot, don't send 
 					msg.reply(result);
 				}
 			}
-        }catch(e){
-            console.log("Unexpected error: "+e)
-        }
-    } else {
-        autocorrect(msg);
-    }
+		} else {
+			const autocorrectResult = autocorrect(msg.content);
+			if (autocorrectResult) {
+				msg.reply("Bedoelde je: " + autocorrectResult + "?");
+			}
+		}
+	} catch (e) {
+		console.error("Unexpected error: ", e)
+	}
 });
 
 client.login(token);
