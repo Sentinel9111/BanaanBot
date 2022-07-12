@@ -160,6 +160,7 @@ function autocorrect(msg) { //all replacements
 	// Lowercase version of the message. We search this string for the terms, but if we don't find a term somewhere,
 	// we keep the character from the original version.
 	const msgLowercase = msg.content.toLowerCase();
+	let changed = false;
 	let result = "";
 	searchString:
 	for (let i = 0; i < msgLowercase.length; i++) {
@@ -182,6 +183,7 @@ function autocorrect(msg) { //all replacements
 			// Stop searching for more terms, and increase i by the length of the term we added.
 			const replacement = replacements[term];
 			result += replacement;
+			changed = true;
 			i += term.length - 1; // -1 because the for loop increases it by 1
 			continue searchString;
 		}
@@ -189,16 +191,14 @@ function autocorrect(msg) { //all replacements
 		result += msg.content[i];
 	}
 
-	if (result == msg.content.toLowerCase()) {	// all lowercase
-		return;
-	}
+	if (changed) {
+		result = "Bedoelde je: " + result + "?";	// Bedoelde je: ?
 
-	result = "Bedoelde je: " + result + "?";	// Bedoelde je: ?
-
-	if (result.length >= 2000) { // if message is too long, send something else
-		msg.reply("Stop pesten 😭");
-	} else if (result !== msg.content) { // otherwise send the message
-		msg.reply(result);
+		if (result.length >= 2000) { // if message is too long, send something else
+			msg.reply("Stop pesten 😭");
+		} else if (result !== msg.content) { // otherwise send the message
+			msg.reply(result);
+		}
 	}
 }
 
