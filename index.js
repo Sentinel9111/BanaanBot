@@ -1,4 +1,4 @@
-// Version: 2.6.1
+// Version: 2.7.1
 
 require("dotenv").config();
 const { Client, Intents } = require('discord.js');
@@ -39,8 +39,6 @@ const commands = {
 	"slgb": gaybowser,
 	"braadworstspring": skeerogame,
 	"bws": skeerogame,
-	//"walcrack": walcrack,
-	//"walcoin": walcrack,
 	"credits": credit,
 }
 
@@ -64,12 +62,6 @@ function dictionary(msg) {
 function skeerogame(msg) {
 	return "https://theepicblock.nl/braadworstspring";
 }
-
-/*
-function walcrack(msg) {
-	return "http://matsw.tk/www/Discord/WalCrack.html";
-}
-*/
 
 function credit(msg) {
 	return "Gemaakt door Sentinel met veel hulp van TheEpicBlock_TEB, MichaHere, Walcraft22, Foxite, Zorian & SK"
@@ -111,14 +103,19 @@ client.login(token);
 
 
 /*
-Known bugs:
-
 Plans:
+
 -Dockerize bot inside of Pterodactyl.
+
 -The bot should send a better help menu inside of Discord.
+
 -The bot should replace your message with a webhook.
+
 -The bot should change the corrected message back to the original message if you reply with "Nee" or "No".
+
 -You should be able to enable or disable certain features or words per server.
+
 -A leveling system which gives XP if you use words from the Kase language should be added.
+
 -Banaanbot hater role.
 */
