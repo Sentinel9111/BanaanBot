@@ -2,7 +2,7 @@
 
 require("dotenv").config();
 const { Client, Intents } = require('discord.js');
-const autocorrect = require("./autocorrect.js");
+const { autocorrect, disableAutocorrect } = require("./autocorrect.js");
 
 const token = process.env.BOT_TOKEN;
 const commandPrefix = process.env.COMMAND_PREFIX;
@@ -75,10 +75,19 @@ function credit(msg) {
 	return "Gemaakt door Sentinel met veel hulp van TheEpicBlock_TEB, MichaHere, Walcraft22, Foxite, Zorian & SK"
 }
 
-client.on('messageCreate', (msg) => {
+client.on('messageCreate', async (msg) => {
 	// if message author is a bot, don't send message
 	if (msg.author.bot) {
 		return;
+	}
+
+	if (msg.reference) {
+		const reference = await msg.fetchReference();
+		if (reference.author.id === msg.client.user.id && msg.content === "bek houwe") {
+			disableAutocorrect(msg.channelId);
+
+			return;
+		}
 	}
 
 	try {
@@ -93,13 +102,13 @@ client.on('messageCreate', (msg) => {
 				} else if (result.length >= 2000) {
 					console.error("trying to send message over 2000 characters");
 				} else {
-					msg.reply(result);
+					await msg.reply(result);
 				}
 			}
 		} else {
-			const autocorrectResult = autocorrect(msg.content);
+			const autocorrectResult = autocorrect(msg);
 			if (autocorrectResult) {
-				msg.reply("Bedoelde je: " + autocorrectResult + "?");
+				await msg.reply("Bedoelde je: " + autocorrectResult + "?");
 			}
 		}
 	} catch (e) {
