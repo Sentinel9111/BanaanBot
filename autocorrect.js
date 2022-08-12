@@ -82,7 +82,30 @@ const replacements = {
     //"t": "TwT", //
 };
 
-function autocorrect(messageContent) {
+// key: channel ID
+// value: Date when autocorrection is re-enabled
+const disabledUntil = {}
+
+function disableAutocorrect(channelId) {
+    // 5 minutes
+    const fiveMinutes = 5 * 60 * 1000;
+    const now = new Date().valueOf();
+
+    disabledUntil[channelId] = new Date(now + fiveMinutes);
+}
+
+function autocorrect(message) {
+    let du = disabledUntil[message.channel.id];
+    if (du) {
+        const duVo = du.valueOf();
+        const disabled = new Date().valueOf() < duVo;
+        if (disabled) {
+            return false;
+        }
+    }
+
+    const messageContent = message.content;
+
     // Lowercase version of the message. We search this string for the terms, but if we don't find a term somewhere,
     // we keep the character from the original version.
     const msgLowercase = messageContent.toLowerCase();
@@ -124,4 +147,4 @@ function autocorrect(messageContent) {
     }
 }
 
-module.exports = autocorrect;
+module.exports = { autocorrect, disableAutocorrect };
