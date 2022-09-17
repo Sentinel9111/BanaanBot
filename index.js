@@ -108,7 +108,12 @@ client.on('messageCreate', async (msg) => {
 		} else {
 			const autocorrectResult = autocorrect(msg);
 			if (autocorrectResult) {
-				await msg.reply("Bedoelde je: " + autocorrectResult + "?");
+				if (autocorrectResult.length >= 2000) {
+					const sobEmoji = "😭"; // It's there, I promise. Your IDE's font may not be able to render it.
+					await msg.reply("Stop pesten " + sobEmoji);
+				} else {
+					await msg.reply("Bedoelde je: " + autocorrectResult + "?");
+				}
 			}
 		}
 	} catch (e) {
