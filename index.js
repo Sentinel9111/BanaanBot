@@ -41,7 +41,7 @@ const commands = {
 }
 
 function help(msg) {
-	let ret = "Lijst van commands:";
+	let ret = "Lijst van commando's:";
 	for (const command in commands) {
 		ret += "\n- " + commandPrefix + command;
 	}
