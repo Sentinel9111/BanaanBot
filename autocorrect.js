@@ -33,7 +33,8 @@ const replacements = {
     "blijheid": "Llanfair­pwllgwyngyll­gogery­chwyrn­drobwll­llan­tysilio­gogo­goch",
     "ghast": "Marshmallow",
     "ster": "meester",
-    "maandag die flut is": "mehndag", // perhaps too specific
+    "flut maandag": "mehndag",
+    "flutmaandag": "mehndag",
     "steve jobs": "Minecraft-hoofdpersonage Banen",
     "natuurkunde": "NASK",
     "natoerkunde": "NASK min SK",
@@ -58,7 +59,7 @@ const replacements = {
     "mensen uit klassen hoger dan die van jou": "tunnels", // too specific
     "laptop": "uit de kluiten gewassen klaptelefoon",
     "wat is dit": "wat is these",
-    "wat zijn de specs": "wat voor laptop zit er in", // perhaps too specific
+    "specs": "laptop",
     "wesp": "weps",
     "hond": "woef",
     "slapen": "z'tjes consumeren",

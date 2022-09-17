@@ -32,7 +32,7 @@ client.once('ready', () => {
 
 const commands = {
 	"help": help,
-	"dictionary": dictionary,
+	"woordenboek": dictionary,
 	"solonggaybowser": gaybowser,
 	"slgb": gaybowser,
 	"braadworstspring": skeerogame,
