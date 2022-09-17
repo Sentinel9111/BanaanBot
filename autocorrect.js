@@ -76,7 +76,6 @@ const replacements = {
     "link": "Golden Mario",
     "verwijderd": "verweitert",
     "wordt": "wort",
-    "word": "wort",
     "het": "hert",
     //"o": "OwO", //
     //"u": "UwU", //
