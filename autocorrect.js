@@ -77,6 +77,7 @@ const replacements = {
     "verwijderd": "verweitert",
     "wordt": "wort",
     "word": "wort",
+    "het": "hert",
     //"o": "OwO", //
     //"u": "UwU", //
     //"t": "TwT", //
