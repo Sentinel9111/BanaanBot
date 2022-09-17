@@ -112,7 +112,15 @@ client.on('messageCreate', async (msg) => {
 					const sobEmoji = "😭"; // It's there, I promise. Your IDE's font may not be able to render it.
 					await msg.reply("Stop pesten " + sobEmoji);
 				} else {
-					await msg.reply("Bedoelde je: " + autocorrectResult + "?");
+					await msg.reply({
+						content: "Bedoelde je: " + autocorrectResult + "?",
+						allowedMentions: {
+							parse: [],
+							users: [],
+							roles: [],
+							repliedUser: false
+						}
+					});
 				}
 			}
 		}
