@@ -39,7 +39,7 @@ const replacements = {
     "natoerkunde": "NASK min SK",
     "no-lifer": "olijfer",
     "o&o": "oooo",
-    "de wortel van iets berekenen": "ergens een wortel op pleuren", //perhaps too specific
+    "de wortel van iets berekenen": "ergens een wortel op pleuren", // perhaps too specific
     "updaten": "omhoogdatumen",
     "pdof": "Portable Document... Oh, and it's a Format",
     "presentatie": "presnentation",
@@ -58,7 +58,7 @@ const replacements = {
     "mensen uit klassen hoger dan die van jou": "tunnels", // too specific
     "laptop": "uit de kluiten gewassen klaptelefoon",
     "wat is dit": "wat is these",
-    "wat zijn de specs": "wat voor laptop zit er in", // too specific
+    "wat zijn de specs": "wat voor laptop zit er in", // perhaps too specific
     "wesp": "weps",
     "hond": "woef",
     "slapen": "z'tjes consumeren",

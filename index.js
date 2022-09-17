@@ -105,11 +105,9 @@ client.login(token);
 /*
 Plans:
 
--Dockerize bot inside of Pterodactyl.
-
 -The bot should send a better help menu inside of Discord.
 
--The bot should replace your message with a webhook.
+-The bot should replace your message with a webhook or embed thingy.
 
 -The bot should change the corrected message back to the original message if you reply with "Nee" or "No".
 
@@ -118,4 +116,6 @@ Plans:
 -A leveling system which gives XP if you use words from the Kase language should be added.
 
 -Banaanbot hater role.
+
+-Make the website update automatically when new words are added in the code.
 */
