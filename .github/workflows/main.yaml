@@ -1,0 +1,20 @@
+name: banaanbot-updater
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+on:
+  push:
+    branches: [ master ]
+jobs:
+   check-banaanbot-version:
+     runs-on: ubuntu-latest
+     steps:
+     - uses: actions/checkout@v3
+     - uses: elgohr/Publish-Docker-Github-Action@3.04
+       with:
+         registry: ${{ secrets.PUSH_REPO }}
+         username: ${{ secrets.PUSH_USER }}
+         password: ${{ secrets.PUSH_PASSWD }}
+         default_branch: master
+
+#   Set up a Github workflow to build the app in the cloud
+#   with every push to the github repo,
+#   and publish the docker image to the Github container registry.
