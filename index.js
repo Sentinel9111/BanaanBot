@@ -1,6 +1,8 @@
 require("dotenv").config();
-const { Client, Intents } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { autocorrect, disableAutocorrect } = require("./autocorrect.js");
+const fs = require('node:fs');
+const path = require('node:path');
 
 const token = process.env.BOT_TOKEN;
 const commandPrefix = process.env.COMMAND_PREFIX;
@@ -8,62 +10,16 @@ const commandPrefix = process.env.COMMAND_PREFIX;
 // Create a new client instance
 const client = new Client({
 	intents: [
-		//Intents.FLAGS.DIRECT_MESSAGES,
-		Intents.FLAGS.GUILD_MESSAGES,
- 		//Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
- 		//Intents.FLAGS.DIRECT_MESSAGE_TYPING,
- 		Intents.FLAGS.GUILDS,
- 		//Intents.FLAGS.GUILD_BANS,
- 		//Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
- 		//Intents.FLAGS.GUILD_INTEGRATIONS,
- 		//Intents.FLAGS.GUILD_INVITES,
- 		//Intents.FLAGS.GUILD_MEMBERS,
- 		//Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
- 		//Intents.FLAGS.GUILD_MESSAGE_TYPING,
- 		//Intents.FLAGS.GUILD_PRESENCES,
- 		//Intents.FLAGS.GUILD_VOICE_STATES,
- 		//Intents.FLAGS.GUILD_WEBHOOKS
+		 GatewayIntentBits.Guilds,
+		 GatewayIntentBits.GuildMessages,
+		 GatewayIntentBits.MessageContent,
+		//  GatewayIntentBits.GuildMembers,
 	]
 });
 
 client.once('ready', () => {
 	console.log('Ready!');
 });
-
-const commands = {
-	"help": help,
-	"woordenboek": dictionary,
-	"solonggaybowser": gaybowser,
-	"slgb": gaybowser,
-	"braadworstspring": skeerogame,
-	"bws": skeerogame,
-	"credits": credit,
-}
-
-function help(msg) {
-	let ret = "Lijst van commando's:";
-	for (const command in commands) {
-		ret += "\n- " + commandPrefix + command;
-	}
-	ret += "\n\nVoor meer hulp, ga naar: https://sentinel9111.github.io/BanaanBotWebsite/ of DM/ping Sentinel#3827 voor suggesties."
-	return ret;
-}
-
-function gaybowser(msg) {
-	return "https://sentinel9111.github.io/SoLongGayBowser/";
-}
-
-function dictionary(msg) {
-	return "https://sentinel9111.github.io/BanaanBotWebsite/";
-}
-
-function skeerogame(msg) {
-	return "https://theepicblock.nl/braadworstspring";
-}
-
-function credit(msg) {
-	return "Gemaakt door Sentinel met veel hulp van Foxite, TheEpicBlock_TEB, MichaHere, Walcraft22 & Zorian"
-}
 
 client.on('messageCreate', async (msg) => {
 	// if message author is a bot, don't send message
@@ -116,6 +72,31 @@ client.on('messageCreate', async (msg) => {
 		}
 	} catch (e) {
 		console.error("Unexpected error: ", e)
+	}
+});
+// slash commands
+client.commands = new Collection();
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+	client.commands.set(command.data.name, command);
+}
+
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isChatInputCommand()) return;
+
+	const command = client.commands.get(interaction.commandName);
+
+	if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
 
