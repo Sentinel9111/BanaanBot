@@ -78,7 +78,8 @@ const replacements = {
     "verwijderd": "verweitert",
     "wordt": "wort",
     "het": "hert",
-    "idee": "Visual Studio Code"
+    "idee": "Visual Studio Code",
+    "speculatie": "speculaasje",
     //"o": "OwO", //
     //"u": "UwU", //
     //"t": "TwT", //
