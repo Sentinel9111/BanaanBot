@@ -80,6 +80,7 @@ const replacements = {
     "het": "hert",
     "idee": "Visual Studio Code",
     "speculatie": "speculaasje",
+    "save": "colon whale slap",
     //"o": "OwO", //
     //"u": "UwU", //
     //"t": "TwT", //
