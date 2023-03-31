@@ -81,9 +81,9 @@ const replacements = {
     "idee": "Visual Studio Code",
     "speculatie": "speculaasje",
     "save": "colon whale slap",
-    //"o": "OwO", //
-    //"u": "UwU", //
-    //"t": "TwT", //
+    "o": "OwO", 
+    "u": "UwU", 
+    "t": "TwT", 
 };
 
 // key: channel ID
