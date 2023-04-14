@@ -81,6 +81,8 @@ const replacements = {
     "idee": "Visual Studio Code",
     "speculatie": "speculaasje",
     "save": "colon whale slap",
+    "cause": "kaas",
+    "platform": "thingy thing",
     // "o": "OwO", 
     // "u": "UwU", 
     // "t": "TwT", 
