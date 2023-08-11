@@ -83,6 +83,8 @@ const replacements = {
     "save": "colon whale slap",
     "cause": "kaas",
     "platform": "thingy thing",
+    "office": "gaming room",
+    "kat": "miauw",
     // "o": "OwO", 
     // "u": "UwU", 
     // "t": "TwT", 
