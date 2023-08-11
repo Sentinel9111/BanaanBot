@@ -85,6 +85,7 @@ const replacements = {
     "platform": "thingy thing",
     "office": "gaming room",
     "kat": "miauw",
+    "moon": "Mommy",
     // "o": "OwO", 
     // "u": "UwU", 
     // "t": "TwT", 
