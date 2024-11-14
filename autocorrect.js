@@ -86,6 +86,8 @@ const replacements = {
     "office": "gaming room",
     "kat": "miauw",
     "moon": "Mommy",
+    "beep": "waterfall",
+    "hrt": "femtanyl"
     // "o": "OwO", 
     // "u": "UwU", 
     // "t": "TwT", 
