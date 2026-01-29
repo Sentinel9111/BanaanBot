@@ -87,7 +87,15 @@ const replacements = {
     "kat": "miauw",
     "moon": "Mommy",
     "beep": "waterfall",
-    "hrt": "femtanyl"
+    "hrt": "femtanyl",
+    "china": "west Taiwanistan",
+    "watamoto": "watermotor",
+    "muziek": "snoeiharde pokkoe",
+    "kijken": "koekeloeren",
+    "how to become": "houten balkon",
+    "fragrance" : "number one fragrance that follows the teachings of Jesus",
+    "parfum": "number one fragrance that follows the teachings of Jesus",
+    "cologne": "number one fragrance that follows the teachings of Jesus",
     // "o": "OwO", 
     // "u": "UwU", 
     // "t": "TwT", 
@@ -103,6 +111,10 @@ function disableAutocorrect(channelId) {
     const now = new Date().valueOf();
 
     disabledUntil[channelId] = new Date(now + fiveMinutes);
+}
+
+function userRespondedNo(message) {
+    return "no"
 }
 
 function autocorrect(message) {
@@ -158,4 +170,4 @@ function autocorrect(message) {
     }
 }
 
-module.exports = { autocorrect, disableAutocorrect };
+module.exports = { autocorrect, disableAutocorrect, userRespondedNo };

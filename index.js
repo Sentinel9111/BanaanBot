@@ -10,9 +10,9 @@ const commandPrefix = process.env.COMMAND_PREFIX;
 // Create a new client instance
 const client = new Client({
 	intents: [
-		 GatewayIntentBits.Guilds,
-		 GatewayIntentBits.GuildMessages,
-		 GatewayIntentBits.MessageContent,
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
 		//  GatewayIntentBits.GuildMembers,
 	]
 });
@@ -31,6 +31,15 @@ client.on('messageCreate', async (msg) => {
 		const reference = await msg.fetchReference();
 		if (reference.author.id === msg.client.user.id && msg.content === "bek houwe") {
 			disableAutocorrect(msg.channelId);
+
+			return;
+		}
+	}
+
+	if (msg.reference) {
+		const reference = await msg.fetchReference();
+		if (reference.author.id === msg.client.user.id && msg.content === "nee") {
+			userRespondedNo(msg.channelId);
 
 			return;
 		}
